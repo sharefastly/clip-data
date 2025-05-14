@@ -1,1 +1,245 @@
-hi there how are you 
+cse@cse-HP-280-G2-MT-Legacy:~$ sudo mysql -u root -p
+[sudo] password for cse: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.42-0ubuntu0.20.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database my_joins
+    -> ;
+Query OK, 1 row affected (0.27 sec)
+
+mysql> use database my_joins
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use database my_joins
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use my_joins
+Database changed
+mysql> cls
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cls' at line 1
+mysql> desc
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> desc database
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> show tables
+    -> ;
+Empty set (0.01 sec)
+
+mysql> create table employee(
+    -> emp_id int primary key,
+    -> emp_name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.66 sec)
+
+mysql> create table department(
+    -> dept_id int primary key,
+    -> dept_name varchar(50)
+    -> );
+Query OK, 0 rows affected (0.72 sec)
+
+mysql> alter table employee add columns dept_id int, salary int, foreign key (dept_id) references department(dept_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept_id int, salary int, foreign key (dept_id) references department(dept_id)' at line 1
+mysql> alter table employee add column dept_id int;
+Query OK, 0 rows affected (1.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add column salary int;
+Query OK, 0 rows affected (1.59 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee add column foreign key (dept_id) references department(dept_id);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (dept_id) references department(dept_id)' at line 1
+mysql> ALTER TABLE employee
+    -> ADD CONSTRAINT fk_dept
+    -> FOREIGN KEY (dept_id) REFERENCES department(dept_id);
+^[[DQuery OK, 0 rows affected (2.27 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE employee
+    -> ADD CONSTRAINT fk_dept
+    -> FOREIGN KEY (dept_id) REFERENCES department(dept_id);
+ERROR 1826 (HY000): Duplicate foreign key constraint name 'fk_dept'
+mysql> ALTER TABLE employee ADD CONSTRAINT FOREIGN KEY (dept_id) REFERENCES department(dept_id);
+Query OK, 0 rows affected (1.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tables
+    -> ;
++--------------------+
+| Tables_in_my_joins |
++--------------------+
+| department         |
+| employee           |
++--------------------+
+2 rows in set (0.01 sec)
+
+mysql> desc department
+    -> ;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| dept_id   | int         | NO   | PRI | NULL    |       |
+| dept_name | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.07 sec)
+
+mysql> desc employee
+    -> ;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| emp_id   | int          | NO   | PRI | NULL    |       |
+| emp_name | varchar(100) | YES  |     | NULL    |       |
+| dept_id  | int          | YES  | MUL | NULL    |       |
+| salary   | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into department value (1, "cse"
+    -> );
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into department value(2, "ai");
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from department
+    -> ;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | cse       |
+|       2 | ai        |
++---------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into employee values (1, "alice", 1, 50), (2, "bob" , 2, 100);
+Query OK, 2 rows affected (0.18 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * form employees
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form employees' at line 1
+mysql> select * from employees
+    -> ;
+ERROR 1146 (42S02): Table 'my_joins.employees' doesn't exist
+mysql> select * from employee
+    -> ;
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|      1 | alice    |       1 |     50 |
+|      2 | bob      |       2 |    100 |
++--------+----------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT a.column1, b.column2
+    -> FROM tableA a
+    -> INNER JOIN tableB b ON a.common_column = b.common_column;
+ERROR 1146 (42S02): Table 'my_joins.tableA' doesn't exist
+mysql> SELECT a.dept_id, b.dept_id FROM employee a INNER JOIN department b ON a.dept_id = b.dept_id;
++---------+---------+
+| dept_id | dept_id |
++---------+---------+
+|       1 |       1 |
+|       2 |       2 |
++---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select a.emp_id, a.emp_name, b.dept_name from employee a inner join department b on a.dept_id = b.dept_id
+    -> ;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|      1 | alice    | cse       |
+|      2 | bob      | ai        |
++--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select a.emp_id, a.emp_name, b.dept_name from employee a left join department b on a.dept_id = b.dept_name;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|      1 | alice    | NULL      |
+|      2 | bob      | NULL      |
++--------+----------+-----------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> select a.emp_id, a.emp_name, b.dept_name from employee a left join department b on a.dept_id = b.dept_name;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|      1 | alice    | NULL      |
+|      2 | bob      | NULL      |
++--------+----------+-----------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> select a.emp_id, a.emp_name, b.dept_name from employee a left join department b on a.dept_id = b.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|      1 | alice    | cse       |
+|      2 | bob      | ai        |
++--------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
